@@ -1,0 +1,15 @@
+.cart-widget {
+    margin: 8px 0;
+    position: relative;
+}
+.cart-widget span {
+    position: absolute;
+    line-height: normal;
+    left: 50%;
+    top: 10px;
+    color: #ee6e73;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: center;
+    transform: translateX(-50%);
+}
