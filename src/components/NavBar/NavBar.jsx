@@ -1,18 +1,23 @@
 import { Link } from "react-router-dom";
+import Logo from "../Logo/Logo";
 import "./NavBar.css";
 
-const NavBar = () => {
+const NavBar = ({ categorias }) => {
   return (
     <nav>
-      <div className="nav-wrapper">
-        <Link className="brand-logo" to="/">MenuApp</Link>
-        <ul>
-          <li>
-            <Link to="/assad">Link</Link>
-          </li>
-          <li>
-            <Link to="/hjkjhk">Link 2</Link>
-          </li>
+      <div className="logo">
+        <Logo/>
+      </div>
+      <div className="nav-wrapper teal darken-1">
+        <ul className="nav-links">
+          {categorias.map(
+            (item) => (
+              <li className="nav-link" key={item.id}>
+                <Link to={`/categoria/${item.id}`}>{item.name}</Link>
+              </li>
+
+            )
+          )}
         </ul>
       </div>
     </nav>

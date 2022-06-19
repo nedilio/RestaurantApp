@@ -2,7 +2,6 @@ const Item = ({ producto, onCart, setOnCart }) => {
   const add = () => {
     const id = producto.id;
     const isOnCart = onCart.find((item) => item.id === id);
-    console.log(isOnCart);
     if (!isOnCart) {
       setOnCart([...onCart, { id: producto.id, count: 1 }]);
     } else {
@@ -26,7 +25,7 @@ const Item = ({ producto, onCart, setOnCart }) => {
   const name = producto.title.rendered;
 
   return (
-    <div className="card col s4">
+    <div className="card col">
       <div className="card-image waves-effect waves-block waves-light">
         <img className="activator" src={image} />
       </div>
@@ -49,7 +48,7 @@ const Item = ({ producto, onCart, setOnCart }) => {
           disabled={!disponible[0]}
           onClick={add}
         >
-          Add
+          Agregar al Carro
         </button>
       </div>
     </div>

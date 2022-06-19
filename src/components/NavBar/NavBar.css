@@ -1,11 +1,22 @@
-.nav-wrapper {
- display: flex;
- justify-content: space-evenly;
-}
+/* .brand-logo {
+    display: block;
+    width: 100%;
+    text-align: center;
+} */
 
-nav .brand-logo {
-    position: relative!important;
-    left: unset!important;
-    transform: unset!important;
+/* .nav-links {
+    display: block;
+} */
+
+.nav-links {
+    overflow: auto;
+    white-space: nowrap;
+
 }
-/* cambio en el archivo css */
+.nav-link {
+    float: none;
+    display: inline-block;
+}
+.logo {
+    line-height: normal;
+}
