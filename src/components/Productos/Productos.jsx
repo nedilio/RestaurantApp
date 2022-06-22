@@ -1,18 +1,32 @@
 import Item from "../Item/Item";
 import CartWidget from "../CartWidget/CartWidget";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Productos = (props) => {
   let categoria = useParams();
   const [productosFiltrados, setProductosFiltrados] = useState([]);
+  const [categories, setCategories] = useState([props.categorias]);
 
   useEffect(() => {
     const productos = props.productos;
     if (!categoria.cat) {
-      setProductosFiltrados(productos);
+      setCategories(props.categorias);
+      let orderedProducts = [];
+      props.categorias.map((cat) => {
+        productos.filter((producto) => {
+          if (producto.categories[0] === cat.id) {
+            orderedProducts.push(producto);
+            return true;
+          }
+        });
+      });
+      setProductosFiltrados(orderedProducts);
     } else {
+      setCategories([
+        props.categorias.find((cat) => cat.id === parseInt(categoria.cat)),
+      ]);
+
       setProductosFiltrados(
         productos.filter(
           (item) => item.categories[0] === parseInt(categoria.cat)
@@ -26,14 +40,28 @@ const Productos = (props) => {
       <div className="container">
         <CartWidget onCart={props.onCart} />
         <div className="row">
-          {productosFiltrados.map((producto) => (
-            <Item
-              producto={producto}
-              key={producto.id}
-              setOnCart={props.setOnCart}
-              onCart={props.onCart}
-            />
-          ))}
+          {productosFiltrados.length === 0 ? (
+            <p>loading...</p>
+          ) : (
+            categories.map((cat) => (
+              <div key={cat.id} className="category">
+                <h2 className="teal-text cat-title">{cat.name}</h2>
+
+                {productosFiltrados.map((producto) => {
+                  if (producto.categories[0] === cat.id) {
+                    return (
+                      <Item
+                        key={producto.id}
+                        producto={producto}
+                        setOnCart={props.setOnCart}
+                        onCart={props.onCart}
+                      />
+                    );
+                  }
+                })}
+              </div>
+            ))
+          )}
         </div>
       </div>
     </div>

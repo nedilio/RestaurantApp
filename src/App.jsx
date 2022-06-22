@@ -3,7 +3,6 @@ import Productos from "./components/Productos/Productos";
 import NavBar from "./components/NavBar/NavBar";
 import Cart from "./components/Cart/Cart";
 import { useEffect, useState } from "react";
-import Logo from "./components/Logo/Logo";
 import './App.css';
 
 function App() {
@@ -17,7 +16,7 @@ function App() {
       .then((res) => setProductos(res))
       .catch(error => console.log(error));
 
-    fetch("http://eitawa.local/wp-json/wp/v2/categories?exclude=1")
+    fetch("http://eitawa.local/wp-json/wp/v2/categories?orderby=description&?order=desc&exclude=1")
       .then((res) => res.json())
       .then((res) => {
         setCategories(
@@ -33,6 +32,7 @@ function App() {
       })
       .catch(error => console.log(error))
   }, []);
+
   return (
     <BrowserRouter>
       <header className="navbar-fixed teal darken-1">
@@ -44,8 +44,9 @@ function App() {
           element={
             <Productos
               productos={productos}
-              setOnCart={setOnCart}
+              categorias={categorias}
               onCart={onCart}
+              setOnCart={setOnCart}
             />
           }
         />
@@ -54,8 +55,9 @@ function App() {
           element={
             <Productos
               productos={productos}
-              setOnCart={setOnCart}
+              categorias={categorias}
               onCart={onCart}
+              setOnCart={setOnCart}
             />
           }
         />
