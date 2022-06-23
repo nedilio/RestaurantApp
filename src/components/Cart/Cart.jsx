@@ -1,13 +1,14 @@
-import { PowerInputSharp } from "@mui/icons-material";
+import { useContext } from "react";
+import CartContext from "../../context/CartContext";
 
 const Cart = (props) => {
-  console.log(props);
+  const {cart, removeItem} = useContext(CartContext);
   return (
     <div className="app-container">
       <div className="container">
         <div className="row"></div>
         <ul className="collection">
-          {props.onCart.map((item) => {
+          {cart.map((item) => {
             let producto = props.productos.find(
               (producto) => producto.id === item.id
             );
@@ -18,10 +19,11 @@ const Cart = (props) => {
                 <span className="title">{producto.title.rendered}</span>
                 <p>
                   cantidad: {item.count} <br />
+                  precio unitario: {producto.acf.price} <br />
                   precio total: {item.count * producto.acf.price}
                 </p>
-                <a href="#!" className="secondary-content">
-                  <i className="material-icons">grade</i>
+                <a href="#" className="secondary-content" onClick={()=> removeItem(item.id)}>
+                  <i className="material-icons">delete_forever</i>
                 </a>
               </li>
             );

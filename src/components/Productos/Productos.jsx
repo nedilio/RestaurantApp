@@ -38,7 +38,7 @@ const Productos = (props) => {
   return (
     <div className="app-container">
       <div className="container">
-        <CartWidget onCart={props.onCart} />
+        <CartWidget />
         <div className="row">
           {productosFiltrados.length === 0 ? (
             <p>loading...</p>
@@ -53,8 +53,6 @@ const Productos = (props) => {
                       <Item
                         key={producto.id}
                         producto={producto}
-                        setOnCart={props.setOnCart}
-                        onCart={props.onCart}
                       />
                     );
                   }

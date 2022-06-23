@@ -9,15 +9,15 @@ const NavBar = ({ categorias }) => {
       <div className="logo">
         <Logo />
       </div>
-      <div className="nav-wrapper teal darken-1">
+      <div className="nav-wrapper ">
         <ul className="nav-links">
-          <li className="nav-link">
+          <li className="nav-link waves-effect waves btn">
             <Link to="/">
-              <Home></Home>
+            <i className="material-icons">home</i>
             </Link>
           </li>
           {categorias.map((item) => (
-            <li className="nav-link" key={item.id}>
+            <li className="nav-link waves-effect waves btn" key={item.id}>
               <Link to={`/categoria/${item.id}`}>{item.name}</Link>
             </li>
           ))}

@@ -1,28 +1,12 @@
-const Item = ({ producto, onCart, setOnCart }) => {
-  const add = () => {
-    const id = producto.id;
-    const isOnCart = onCart.find((item) => item.id === id);
-    if (!isOnCart) {
-      setOnCart([...onCart, { id: producto.id, count: 1 }]);
-    } else {
-      setOnCart(
-        onCart.map((item) => {
-          console.log(item.id, id);
-          if (item.id === id) {
-            return {
-              ...item,
-              count: item.count + 1,
-            };
-          } else {
-            return item;
-          }
-        })
-      );
-    }
-  };
+import { useContext } from "react";
+import CartContext from "../../context/CartContext";
+
+const Item = ({ producto }) => {
+  const { addToCart } = useContext(CartContext);
 
   const { price, description, image, disponible } = producto.acf;
   const name = producto.title.rendered;
+  const id = producto.id;
 
   return (
     <div className="card col">
@@ -46,9 +30,9 @@ const Item = ({ producto, onCart, setOnCart }) => {
         <button
           className="btn waves-effect waves-light"
           disabled={!disponible[0]}
-          onClick={add}
+          onClick={() => addToCart(id, producto)}
         >
-          Agregar al Carro
+          <i className="material-icons">add_shopping_cart</i>
         </button>
       </div>
     </div>
