@@ -1,11 +1,12 @@
 import { ShoppingCart } from "@mui/icons-material";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import CartContext from "../../context/CartContext";
 import "./CartWidget.css";
 
 const CartWidget = () => {
   const { cart } = useContext(CartContext);
+
   let items = cart
     .map((item) => item.count)
     .reduce((sum, value) => sum + value, 0);

@@ -11,7 +11,9 @@ function App() {
   const [categorias, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch("http://mdsmx.xyz/restaurantapp/wp-json/wp/v2/posts?acf_format=standard")
+    fetch(
+      "http://mdsmx.xyz/restaurantapp/wp-json/wp/v2/posts?acf_format=standard"
+    )
       .then((res) => res.json())
       .then((res) => setProductos(res))
       .catch((error) => console.log(error));
@@ -35,40 +37,32 @@ function App() {
       .catch((error) => console.log(error));
   }, []);
 
-  return (
+  if (productos && categorias) {
+    return (
       <CartContextProvider>
-    <BrowserRouter>
-      <header className="navbar-fixed teal darken-1">
-        <NavBar categorias={categorias} />
-      </header>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Productos
-                productos={productos}
-                categorias={categorias}
-              />
-            }
-          />
-          <Route
-            path="/categoria/:cat"
-            element={
-              <Productos
-                productos={productos}
-                categorias={categorias}
-              />
-            }
-          />
-
-          <Route
-            path="/cart"
-            element={<Cart productos={productos}/>}
-          />
-        </Routes>
-    </BrowserRouter>
+        <BrowserRouter>
+          <header className="navbar-fixed teal darken-1">
+            <NavBar categorias={categorias} />
+          </header>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Productos productos={productos} categorias={categorias} />
+              }
+            />
+            <Route
+              path="/categoria/:cat"
+              element={
+                <Productos productos={productos} categorias={categorias} />
+              }
+            />
+            <Route path="/cart" element={<Cart productos={productos} />} />
+          </Routes>
+        </BrowserRouter>
       </CartContextProvider>
-  );
+    );
+  }
 }
 
 export default App;
