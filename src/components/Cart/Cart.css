@@ -1,0 +1,9 @@
+.collection .collection-item.avatar .secondary-content {
+    bottom: 16px;
+    top: unset;
+}
+
+.total p {
+    font-weight: bold;
+    font-size: 18px;
+}

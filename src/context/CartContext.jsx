@@ -39,8 +39,37 @@ export function CartContextProvider(props) {
     window.localStorage.setItem("cart", JSON.stringify(cart));
   }
 
+  function addOne(id) {
+    setCart(
+      cart.map((item) => {
+        if (item.id === id) {
+          return {
+            ...item,
+            count: item.count + 1,
+          };
+        } else {
+          return item;
+        }
+      })
+    );
+  }
+  function removeOne(id) {
+    setCart(
+      cart.map((item) => {
+        if (item.id === id) {
+          return {
+            ...item,
+            count: item.count - 1,
+          };
+        } else {
+          return item;
+        }
+      })
+    );
+  }
+
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeItem }}>
+    <CartContext.Provider value={{ cart, addToCart, removeItem, addOne, removeOne }}>
       {props.children}
     </CartContext.Provider>
   );
